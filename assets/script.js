@@ -1,15 +1,15 @@
-//preparing the page to read jQuery
-$(document).ready(function () {
+//PREPARING PAGE TO MANIPULATE THE DOM WHEN LOADED
+$(function() {
+    console.log( "ready!" );
 });
-console.log("I'm ready!");
 
-//global variables set up
+//GLOBAL VARIABLES CREATED
 var saveBtn = $(".saveBtn")
 
-//date & time displayed
+//DATE AND TIME DISPLAYED
 $("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
 
-//function to update & display date and time
+//FUNCTION FOR UPDATING TIME WITHOUT REFRESHING THE PAGE
 function updateClock() {
     $("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
 }
@@ -17,18 +17,18 @@ function updateClock() {
 setInterval(updateClock, 1000)
 
 
-//for loop created to set up hourly rows
+//FOR LOOP CREATED TO SET UP THE HOURLY ROWS
 for (var hour = 9; hour < 18; hour++) {
     var hourlyRow = $("<div>");
     hourlyRow.addClass("row");
     hourlyRow.attr("value", [hour]);
 
-    //creating the first column of each row
+    //CREATING THE FIRST COLUMN OF EACH ROW (TIME)
     var colOne = $("<div>");
     colOne.addClass("col-md-1 hour");
     colOne.attr("value", [hour]);
 
-    //conditional statements to post time (and convert from military time)
+    //CONDITIONAL STATEMENTS THAT ADJUST TIME FROM MILITARY TIME
     if (hour === 12) {
         colOne.text([hour] + ":00 PM")
     } else if (hour >= 13) {
@@ -38,21 +38,22 @@ for (var hour = 9; hour < 18; hour++) {
         colOne.text(hour + ":00 AM")
     }
 
-    //creating the second column of each row (the text area where user will enter task(s))
+    //CREATING THE SECOND COLUMN OF EACH ROW (WHERE THE USER WILL ENTER THEIR TASK(S))
     var colTwo = $("<textarea>");
     colTwo.addClass("col-md-8");
     colTwo.attr("value", [hour]);
     colTwo.addClass("text-area userTasks");
     colTwo.attr("placeholder", "Enter your task(s) here")
+    colTwo.attr("id", "text-" + hour)
     
-    // creates button for save and third col
+    // CREATING THE THIRD COLUMN (SAVE BUTTON)
     var colThree = $("<button>");
     colThree.addClass("col-md-1");
     colThree.addClass("btn btn-dark saveBtn");
     colThree.attr("value", [hour]);
     colThree.text("Click to Save")
 
-    //appends all 3 columns to the row, then appends the row to the container
+    //ATTACHING ALL THREE COLUMNS TO THE ROW, THEN TO THE CONTAINER
     hourlyRow.append(colOne);
     hourlyRow.append(colTwo);
     hourlyRow.append(colThree);
@@ -60,11 +61,11 @@ for (var hour = 9; hour < 18; hour++) {
 
 }
 
-//variables set up to access columns
+//VARIABLES SET UP TO ACCESS COLUMNS
 var userTasks = $("userTasks")
 
-// lock button & function for each hour
-// saving tasks to local storage
+// SAVE BUTTON FUNCTION
+    // SAVES TO LOCAL STORAGE
 function saveTask() {
     var task = userTasks.value.trim();
     if (userTasks !== "") {
@@ -88,14 +89,13 @@ saveBtn.addEventListener("click", function () {
 
 function showTasks() {
     var savedTask = JSON.parse(localStorage.getItem("savedTask")) || []
-    savedTask.forEach(function(score) {
+    savedTask.forEach(function(hour) {
         var textAreas = $(".text-area");
         textAreas.textContent = userTasks.hour, userTasks.task
-        var lsTasks = document.getElementById("user-initials");
+        var lsTasks = $("userTasks");
 
         lsTasks.appendChild(textAreas);
     })
 };
 
-//if/else statements regarding time to change the color on screen (style already in css)
-// if ()
+//CONDITIONAL STATEMENTS SO THAT THE BACKGROUND COLOR OF THE HOURS WILL CHANGE DEPDENDING ON IF THAT HOUR IS IN THE PAST/PRESENT/FUTURE
