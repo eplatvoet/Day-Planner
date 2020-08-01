@@ -30,6 +30,10 @@ body {
     border-radius: 15px;
   }
   
+  .container {
+      justify-content: center;
+  }
+
   .row {
     white-space: pre-wrap;
     height: 80px;
@@ -40,6 +44,7 @@ body {
     background-color: #ffffff;
     color: #000000;
     border-top: 1px dashed #000000;
+    font-size: small;
   }
   
   .past {
@@ -48,12 +53,12 @@ body {
   }
   
   .present {
-    background-color: #ff6961;
+    background-color: #77dd77;
     color: white;
   }
   
   .future {
-    background-color: #77dd77;
+    background-color: darkgreen;
     color: white;
   }
   
@@ -61,12 +66,13 @@ body {
     border-left: 1px solid black;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    background-color: #06AED5;
-    color: white;
+    background-color: o;
+    color: lime;
   }
   
   .saveBtn i:hover {
     font-size: 20px;
     transition: all .3s ease-in-out;
+    background-color: black;
   }
   

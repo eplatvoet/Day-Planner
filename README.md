@@ -44,3 +44,6 @@ You are required to submit the following for review:
 
 * The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
     
+
+## Technologies Used:
+https://dickinsoninvestments.com/wp-content/uploads/iStk-SAVE-13088649Large-150x150.jpg\
