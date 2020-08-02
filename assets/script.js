@@ -1,101 +1,56 @@
-//PREPARING PAGE TO MANIPULATE THE DOM WHEN LOADED
-$(function() {
-    console.log( "ready!" );
-});
+//WILL LOAD JS ONCE HTML IS ALL LOADED
+$(function () {
+    console.log("ready!");
 
-//GLOBAL VARIABLES CREATED
-var saveBtn = $(".saveBtn")
-
-//DATE AND TIME DISPLAYED
-$("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
-
-//FUNCTION FOR UPDATING TIME WITHOUT REFRESHING THE PAGE
-function updateClock() {
+    //DATE AND TIME DISPLAYED
     $("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
-}
 
-setInterval(updateClock, 1000)
-
-
-//FOR LOOP CREATED TO SET UP THE HOURLY ROWS
-for (var hour = 9; hour < 18; hour++) {
-    var hourlyRow = $("<div>");
-    hourlyRow.addClass("row");
-    hourlyRow.attr("value", [hour]);
-
-    //CREATING THE FIRST COLUMN OF EACH ROW (TIME)
-    var colOne = $("<div>");
-    colOne.addClass("col-md-1 hour");
-    colOne.attr("value", [hour]);
-
-    //CONDITIONAL STATEMENTS THAT ADJUST TIME FROM MILITARY TIME
-    if (hour === 12) {
-        colOne.text([hour] + ":00 PM")
-    } else if (hour >= 13) {
-        colOne.text([hour] - 12 + ":00 PM")
-    }
-    else {
-        colOne.text(hour + ":00 AM")
+    //FUNCTION FOR UPDATING TIME WITHOUT REFRESHING THE PAGE
+    function updateClock() {
+        $("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
     }
 
-    //CREATING THE SECOND COLUMN OF EACH ROW (WHERE THE USER WILL ENTER THEIR TASK(S))
-    var colTwo = $("<textarea>");
-    colTwo.addClass("col-md-8");
-    colTwo.attr("value", [hour]);
-    colTwo.addClass("text-area userTasks");
-    colTwo.attr("placeholder", "Enter your task(s) here")
-    colTwo.attr("id", "text-" + hour)
+    setInterval(updateClock, 1000)
+    console.log("the current time is " + moment())
+
+    //ONCE CLICKED, SAVE BUTTON WILL STORE THE USER'S INPUT TO LOCAL STORAGE SO THEY CAN VIEW ON THEIR CALENDAR IF PAGE GETS REFRESHED
+    $(".saveBtn").on("click", function () {
+        var value = $(this).siblings(".reservation").val();
+        var time = $(this).parent().attr("id");
+        localStorage.setItem(time, value);
+    });
+
+    //CODE TO RETRIEVE ITEMS FROM LOCAL STORAGE IF REFRESH HIT
+    $("#hr-9 .reservation").val(localStorage.getItem("hr-9"));
+    $("#hr-10 .reservation").val(localStorage.getItem("hr-10"));
+    $("#hr-11 .reservation").val(localStorage.getItem("hr-11"));
+    $("#hr-12 .reservation").val(localStorage.getItem("hr-12"));
+    $("#hr-13 .reservation").val(localStorage.getItem("hr-13"));
+    $("#hr-14 .reservation").val(localStorage.getItem("hr-14"));
+    $("#hr-15 .reservation").val(localStorage.getItem("hr-15"));
+    $("#hr-16 .reservation").val(localStorage.getItem("hr-16"));
+    $("#hr-17 .reservation").val(localStorage.getItem("hr-17"));
+
+    //VARIABLES SET UP TO DECLARE TIME TO BE USED IN FUNCTION BELOW
+    var today = new Date();
+    var currentTime = today.getHours();
     
-    // CREATING THE THIRD COLUMN (SAVE BUTTON)
-    var colThree = $("<button>");
-    colThree.addClass("col-md-1");
-    colThree.addClass("btn btn-dark saveBtn");
-    colThree.attr("value", [hour]);
-    colThree.text("Click to Save")
+    //FUNCTION CREATED TO SHOW A DIFFERENT COLOR BACKGROUND DEPENDING ON THE CURRENT TIME OF DAY
+    function updateColor() {
+        var currentTime = today.getHours();
+        $(".timeslot").each(function () {
+            var blockTime = parseInt($(this).attr("id").split("-")[1]);
+            if (blockTime < currentTime) {
+                $(this).addClass("past");
+            } else if (blockTime === currentTime) {
+                $(this).removeClass("past").addClass("present");
+            } else {
+                $(this).removeClass("past", "present").addClass("future");
+            }
+        })
+    };
 
-    //ATTACHING ALL THREE COLUMNS TO THE ROW, THEN TO THE CONTAINER
-    hourlyRow.append(colOne);
-    hourlyRow.append(colTwo);
-    hourlyRow.append(colThree);
-    $(".container").append(hourlyRow);
+    //FUNCTION CALL TO GET THE COLORS TO UPDATE:
+    updateColor();
 
-}
-
-//VARIABLES SET UP TO ACCESS COLUMNS
-var userTasks = $("userTasks")
-
-// SAVE BUTTON FUNCTION
-    // SAVES TO LOCAL STORAGE
-function saveTask() {
-    var task = userTasks.value.trim();
-    if (userTasks !== "") {
-        var savedTask = JSON.parse(localStorage.getItem("savedTask")) || [];
-        var taskObject = {
-            hour: hour,
-            task: task
-        };
-        console.log(taskObject);
-        savedTask.push(taskObject);
-        console.log(savedTask);
-        localStorage.setItem("savedTask", JSON.stringify(savedTask));
-    }
-};
-saveBtn.addEventListener("click", function () {
-    event.preventDefault();
-    userTasks.value = "";
-    saveTask();
-    showTasks();
 });
-
-function showTasks() {
-    var savedTask = JSON.parse(localStorage.getItem("savedTask")) || []
-    savedTask.forEach(function(hour) {
-        var textAreas = $(".text-area");
-        textAreas.textContent = userTasks.hour, userTasks.task
-        var lsTasks = $("userTasks");
-
-        lsTasks.appendChild(textAreas);
-    })
-};
-
-//CONDITIONAL STATEMENTS SO THAT THE BACKGROUND COLOR OF THE HOURS WILL CHANGE DEPDENDING ON IF THAT HOUR IS IN THE PAST/PRESENT/FUTURE
