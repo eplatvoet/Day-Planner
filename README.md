@@ -1,16 +1,41 @@
-# Day-Planner
+# Code Refactor
+# ![Git Hub license](https://img.shields.io/badge/License-Unlicensed-blue.svg)
 
-For this project, we needed to create a day planner that would allow the user to input tasks & save them to local storage so when the page refreshes, their tasks are still on the page. The timeblocks also needed to reflect whether that hour was in the past, present, or future.
+## TABLE OF CONTENTS
+- [DESCRIPTION](#DESCRIPTION)  
+- [LICENSE](#LICENSE)  
+- [INSTALLATION](#INSTALLATION)  
+- [TECHNOLOGIES](#TECHNOLOGIES)  
+- [QUESTIONS](#QUESTIONS)  
+- [CONTRIBUTIONS](#CONTRIBUTIONS)
+- [LINKS](#LINKS)  
+- [SCREENSHOTS](#SCREENSHOTS)  
 
-## Technologies Used:
--HTML  
--CSS  
--JavaScript  
--jQuery  
--moment.js  
-Activities from previous classes were helpful, as well as the weekend study review. I took a lot of information out of the review that not only allowed me to complete this assignment 100%, but I understand it a lot more so I will be able to use it with confidence in the future. Live coding with classmates after class was also a huge help as well.  
+## DESCRIPTION
+Welcome to the Day Planner! Perfect for easily keeping track of tasks, this application utilizes local storage to prevent the user from losing saved tasks. Moment.js is used to help remind the user of the time by having past, present, and future color themes. 
 
-## Screenshot & Link:
+## LICENSE
+Unlicensed
 
-https://eplatvoet.github.io/Day-Planner/  
-![Image of deployed planner](assets/screenshot.png)
+## INSTALLATION
+If repository is forked, run "npm i" to install all dependencies. 
+
+## TECHNOLOGIES
+- HTML  
+- CSS  
+- JavaScript  
+- jQuery  
+- moment.js  
+
+## QUESTIONS
+My GitHub username is *eplatvoet* & my profile can be found [here](https://github.com/eplatvoet) 
+
+## CONTRIBUTIONS
+Feel free to fork the repository if any upgrades/features can be implemented. I can be reached at erin.didomenico520@gmail.com if you have any other questions about this repository.
+
+## LINKS
+[REPO](hhttps://github.com/eplatvoet/Day-Planner)  
+[DEPLOYED](https://eplatvoet.github.io/Day-Planner/)  
+
+## SCREENSHOTS 
+![Screenshot](./assets/screenshot.png)  
