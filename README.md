@@ -1,4 +1,4 @@
-# Code Refactor
+# Day Planner
 # ![Git Hub license](https://img.shields.io/badge/License-Unlicensed-blue.svg)
 
 ## TABLE OF CONTENTS
